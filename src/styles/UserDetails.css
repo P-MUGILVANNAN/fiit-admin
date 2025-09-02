@@ -1,0 +1,156 @@
+.user-details-container {
+  background: linear-gradient(180deg, #1e3a8a, #000000);
+  color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+}
+
+/* Back button */
+.back-btn {
+  margin-bottom: 1.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Profile Header */
+.user-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.user-avatar-lg {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4f46e5;
+}
+
+.user-profile-info h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.user-profile-info p {
+  margin: 0.3rem 0;
+  font-size: 1.05rem;
+}
+
+/* Sections */
+.user-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.user-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #a5b4fc;
+}
+
+/* Skills */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skill-badge {
+  background: #4f46e5;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.status-badge.normal {
+  background: #10b981;
+  color: #fff;
+}
+
+.status-badge.suspicious {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* Resume */
+.resume-actions {
+  margin-top: 1rem;
+}
+
+.link-btn {
+  color: #60a5fa;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+/* Lists */
+.user-section ul {
+  margin-left: 1.2rem;
+  list-style: disc;
+}
+
+.user-section li {
+  margin-bottom: 0.6rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.55rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+  background: #4f46e5;
+  color: #fff;
+}
+.btn-primary:hover {
+  background: #4338ca;
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: #fff;
+}
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .user-profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .user-avatar-lg {
+    width: 100px;
+    height: 100px;
+  }
+}

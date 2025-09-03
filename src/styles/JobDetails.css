@@ -1,0 +1,159 @@
+/* ===== Job Details Page ===== */
+.job-details-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.job-details-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.company-img {
+  max-width: 160px;
+  max-height: 80px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.job-info p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.job-info span {
+  font-weight: bold;
+  color: #444;
+}
+
+.job-requirements {
+  margin-top: 1.5rem;
+}
+
+.job-requirements h4 {
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+
+.job-requirements ul {
+  padding-left: 1.2rem;
+}
+
+.job-requirements li {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+  background: #4f46e5;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #4338ca;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.btn-secondary {
+  background: #e5e7eb;
+  color: #111;
+}
+
+.btn-secondary:hover {
+  background: #d1d5db;
+}
+
+.job-actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+/* ===== Modal Styles ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.65); /* dark blur */
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  animation: slideUp 0.3s ease-in-out;
+}
+
+.modal-box h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+.modal-box p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #444;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.error-box {
+  border-top: 4px solid #dc2626;
+}
+
+.error-box h3 {
+  color: #dc2626;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

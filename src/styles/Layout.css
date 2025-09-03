@@ -1,0 +1,14 @@
+/* Flex column layout to push footer to bottom */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d1b4c, #000000);
+  color: #e0e0e0;
+}
+
+/* Main content grows to fill space between header and footer */
+.app-main {
+  flex: 1;
+  padding: 1.5rem 1rem;
+}

@@ -54,6 +54,11 @@ function Login() {
       if (response.data?.token) {
         login(response.data.token, { email });
         setSuccess(true);
+
+        // Auto-dismiss toast after 3 seconds
+        setTimeout(() => setSuccess(false), 3000);
+
+        // Navigate to dashboard
         setTimeout(() => navigate("/dashboard"), 1500);
       } else {
         setError("Invalid login response");
@@ -190,13 +195,7 @@ function Login() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            {loading ? (
-              <>
-                <span className="spinner"></span> Logging in...
-              </>
-            ) : (
-              "Login"
-            )}
+            {loading ? "Logging in..." : "Login"}
           </motion.button>
         </form>
 
@@ -205,9 +204,10 @@ function Login() {
           {success && (
             <motion.div
               className="success-toast"
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "100%", opacity: 0 }}
+              initial={{ x: 100, y: 100, opacity: 0 }}
+              animate={{ x: 0, y: 0, opacity: 1 }}
+              exit={{ x: 100, y: 100, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 120, damping: 15 }}
             >
               <span className="toast-icon">✅</span>
               Successfully Logged In

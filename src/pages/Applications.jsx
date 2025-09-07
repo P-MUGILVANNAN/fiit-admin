@@ -14,9 +14,9 @@ const Applications = () => {
   const [search, setSearch] = useState("");
 
   const [selectedApp, setSelectedApp] = useState(null);
-  const [showModal, setShowModal] = useState(false);
   const [newStatus, setNewStatus] = useState("");
-  const [notifyModal, setNotifyModal] = useState({ show: false, message: "" });
+  const [confirmBox, setConfirmBox] = useState(null);
+  const [notifyMsg, setNotifyMsg] = useState(null);
 
   const token = localStorage.getItem("token");
 
@@ -44,7 +44,7 @@ const Applications = () => {
   const handleStatusChange = (app, status) => {
     setSelectedApp(app);
     setNewStatus(status);
-    setShowModal(true);
+    setConfirmBox(`Change status to "${status}"?`);
   };
 
   const confirmStatusChange = async () => {
@@ -54,11 +54,11 @@ const Applications = () => {
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setShowModal(false);
+      setConfirmBox(null);
       fetchApplications(page);
     } catch (err) {
       console.error(err);
-      setNotifyModal({ show: true, message: "Error updating status." });
+      setNotifyMsg("Error updating status.");
     }
   };
 
@@ -69,10 +69,10 @@ const Applications = () => {
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setNotifyModal({ show: true, message: "Notification sent successfully!" });
+      setNotifyMsg("✅ Notification sent successfully!");
     } catch (err) {
       console.error(err);
-      setNotifyModal({ show: true, message: "Error sending notification." });
+      setNotifyMsg("Error sending notification.");
     }
   };
 
@@ -85,21 +85,31 @@ const Applications = () => {
     );
   });
 
-  if (loading) return <p className="text-center loading">Loading applications...</p>;
+  if (loading) {
+    return (
+      <div className="loading-spinner-container">
+        <div className="spinner"></div>
+        <p>Loading applications...</p>
+      </div>
+    );
+  }
+
   if (error) return <p className="text-center error">{error}</p>;
-  if (!applications.length) return <p className="text-center no-data">No applications found</p>;
+  if (!applications.length)
+    return <p className="text-center no-data">No applications found</p>;
 
   return (
     <div className="applications-container">
-      <h2>Applications</h2>
-
-      <input
-        type="text"
-        className="search-input"
-        placeholder="Search by name, email, or job..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className="header-row">
+        <h2>Applications</h2>
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search by name, email, or job..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
 
       <div className="table-wrapper">
         <table className="applications-table">
@@ -120,21 +130,28 @@ const Applications = () => {
                 <td>{app.applicant?.email || "N/A"}</td>
                 <td>{app.job?.title || "N/A"}</td>
                 <td>
-                  <span className={`status-badge ${app.status}`}>{app.status}</span>
+                  <span className={`status-badge ${app.status}`}>
+                    {app.status}
+                  </span>
                 </td>
                 <td>{new Date(app.appliedAt).toLocaleDateString()}</td>
                 <td>
                   <select
                     className="status-select"
                     value={app.status}
-                    onChange={(e) => handleStatusChange(app, e.target.value)}
+                    onChange={(e) =>
+                      handleStatusChange(app, e.target.value)
+                    }
                   >
                     <option value="applied">Applied</option>
                     <option value="shortlisted">Shortlisted</option>
                     <option value="accepted">Accepted</option>
                     <option value="rejected">Rejected</option>
                   </select>
-                  <button className="btn btn-secondary" onClick={() => handleNotify(app._id)}>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => handleNotify(app._id)}
+                  >
                     Notify
                   </button>
                 </td>
@@ -145,25 +162,38 @@ const Applications = () => {
       </div>
 
       <div className="pagination">
-        <button className="btn" disabled={page === 1} onClick={() => setPage(page - 1)}>
+        <button
+          className="btn"
+          disabled={page === 1}
+          onClick={() => setPage(page - 1)}
+        >
           Previous
         </button>
-        <span>Page {page} of {totalPages}</span>
-        <button className="btn" disabled={page === totalPages} onClick={() => setPage(page + 1)}>
+        <span>
+          Page {page} of {totalPages}
+        </span>
+        <button
+          className="btn"
+          disabled={page === totalPages}
+          onClick={() => setPage(page + 1)}
+        >
           Next
         </button>
       </div>
 
-      {/* Status Change Modal */}
-      {showModal && (
+      {/* Confirm Box */}
+      {confirmBox && (
         <div className="modal-overlay">
           <div className="modal-box">
-            <h3>Change status to <b>{newStatus}</b>?</h3>
+            <h3>{confirmBox}</h3>
             <div className="modal-actions">
               <button className="btn btn-primary" onClick={confirmStatusChange}>
                 Yes, Confirm
               </button>
-              <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
+              <button
+                className="btn btn-secondary"
+                onClick={() => setConfirmBox(null)}
+              >
                 Cancel
               </button>
             </div>
@@ -171,13 +201,16 @@ const Applications = () => {
         </div>
       )}
 
-      {/* Notify Modal */}
-      {notifyModal.show && (
+      {/* Notification Message */}
+      {notifyMsg && (
         <div className="modal-overlay">
           <div className="modal-box">
-            <h3>{notifyModal.message}</h3>
+            <h3>{notifyMsg}</h3>
             <div className="modal-actions">
-              <button className="btn btn-primary" onClick={() => setNotifyModal({ show: false, message: "" })}>
+              <button
+                className="btn btn-primary"
+                onClick={() => setNotifyMsg(null)}
+              >
                 OK
               </button>
             </div>

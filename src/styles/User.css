@@ -1,183 +1,243 @@
-/* Container */
+/* ========= User List Container ========= */
 .user-list-container {
-  background: linear-gradient(180deg, #1e3a8a, #000000);
-  color: #ffffff;
-  padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-  margin-bottom: 2rem;
-  font-size: 1.05rem; /* Slightly larger font */
+  background: linear-gradient(180deg, #1e3a8a, #000000) !important;
+  color: #ffffff !important;
+  padding: 2.5rem !important;
+  border-radius: 16px !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.7) !important;
+  margin-bottom: 2rem !important;
+  font-size: 1.05rem !important;
+  animation: fadeIn 0.6s ease-in-out !important;
 }
 
-/* Wrapper for scroll */
+/* ========= Header ========= */
+.user-header {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.user-header h1 {
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+}
+
+/* ========= Search Bar ========= */
+.search-bar {
+  padding: 0.7rem 1.2rem !important;
+  border-radius: 10px !important;
+  border: none !important;
+  outline: none !important;
+  font-size: 1rem !important;
+  width: 280px !important;
+  background: #111827 !important;
+  color: #fff !important;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6) !important;
+}
+
+.search-bar::placeholder {
+  color: #9ca3af !important;
+}
+
+/* ========= Table ========= */
 .table-wrapper {
-  overflow-x: auto;
-  border-radius: 12px;
+  overflow-x: auto !important;
+  border-radius: 12px !important;
 }
 
-/* Table */
 .users-table {
-  width: 100%;
-  border-collapse: collapse; /* Prevents double borders */
-  min-width: 850px;
-  font-size: 1.05rem;
+  width: 100% !important;
+  border-collapse: collapse !important;
+  min-width: 850px !important;
+  font-size: 1.05rem !important;
 }
 
 .users-table th,
 .users-table td {
-  padding: 1.1rem 1.4rem; /* More space for readability */
-  text-align: left;
-  vertical-align: middle;
-  font-size: 1.05rem;
+  padding: 1rem 1.2rem !important;
+  text-align: left !important;
+  vertical-align: middle !important;
 }
 
 .users-table th {
-  background: rgba(255, 255, 255, 0.08);
-  font-weight: 700;
-  color: #f0f9ff;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  background: linear-gradient(180deg, #1e3a8a, #1e40af) !important;
+  font-weight: 700 !important;
+  color: #f0f9ff !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Row borders */
+/* ========= Rows ========= */
 .users-table tbody tr {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-.users-table tbody tr:last-child {
-  border-bottom: none; /* Clean bottom border */
+.striped-row {
+  background: rgba(255, 255, 255, 0.03) !important;
 }
 
-/* Hover */
 .users-table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Suspicious row */
 .suspicious-row {
-  background: rgba(239, 68, 68, 0.15);
+  background: rgba(239, 68, 68, 0.15) !important;
 }
 
-/* Avatar */
+/* ========= Avatar ========= */
 .table-avatar {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #4f46e5;
+  width: 55px !important;
+  height: 55px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 2px solid #4f46e5 !important;
 }
 
-/* Status Badge */
+/* ========= Status Badge ========= */
 .status-badge {
-  padding: 0.5rem 0.9rem;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 1rem;
-  display: inline-block;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 90px !important;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
 }
 
 .status-badge.normal {
-  background-color: #10b981;
-  color: #ffffff;
+  background-color: #10b981 !important;
+  color: #ffffff !important;
 }
 
 .status-badge.suspicious {
-  background-color: #ef4444;
-  color: #ffffff;
+  background-color: #ef4444 !important;
+  color: #ffffff !important;
 }
 
-/* Actions */
+/* ========= Action Buttons ========= */
 .actions-cell {
-  display: flex;
-  gap: 0.8rem;
-  justify-content: flex-end;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0.6rem !important;
 }
 
 .btn-sm {
-  padding: 0.55rem 1.1rem;
-  border-radius: 10px;
-  border: none;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  font-weight: 600;
+  padding: 0.55rem 1.1rem !important;
+  border-radius: 10px !important;
+  border: none !important;
+  font-size: 0.95rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease-in-out !important;
+  font-weight: 600 !important;
+  min-width: 80px !important;
+  text-align: center !important;
 }
 
-/* Button Colors */
+/* ========= Button Colors ========= */
 .btn-sm.btn-danger {
-  background-color: #ef4444;
-  color: #fff;
+  background-color: #ef4444 !important;
+  color: #fff !important;
 }
 .btn-sm.btn-danger:hover {
-  background-color: #dc2626;
+  background-color: #dc2626 !important;
 }
 
 .btn-sm.btn-warning {
-  background-color: #fbbf24;
-  color: #000;
+  background-color: #fbbf24 !important;
+  color: #000 !important;
 }
 .btn-sm.btn-warning:hover {
-  background-color: #f59e0b;
+  background-color: #f59e0b !important;
 }
 
 .btn-sm.btn-secondary {
-  background-color: #6b7280;
-  color: #fff;
+  background-color: #6b7280 !important;
+  color: #fff !important;
 }
 .btn-sm.btn-secondary:hover {
-  background-color: #4b5563;
+  background-color: #4b5563 !important;
 }
 
 .btn-sm.btn-primary {
-  background-color: #4f46e5;
-  color: #fff;
+  background-color: #3b82f6 !important;
+  color: #fff !important;
 }
 .btn-sm.btn-primary:hover {
-  background-color: #4338ca;
+  background-color: #2563eb !important;
 }
 
-/* Loading/Error/No Data */
+/* ========= Spinner ========= */
+.spinner-container {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-height: 200px !important;
+  gap: 1rem !important;
+}
+
+.spinner {
+  border: 6px solid rgba(255, 255, 255, 0.2) !important;
+  border-top: 6px solid #3b82f6 !important;
+  border-radius: 50% !important;
+  width: 55px !important;
+  height: 55px !important;
+  animation: spin 1s linear infinite !important;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg) !important;
+  }
+}
+
+/* ========= Error / No Data ========= */
 .loading,
 .error,
 .no-data {
-  text-align: center;
-  margin: 2rem 0;
-  font-size: 1.2rem;
-  color: #f0f9ff;
+  text-align: center !important;
+  margin: 2rem 0 !important;
+  font-size: 1.2rem !important;
+  color: #f0f9ff !important;
 }
 
-/* Responsive */
+/* ========= Responsive ========= */
 @media (max-width: 1024px) {
   .users-table {
-    font-size: 1rem;
-    min-width: unset;
+    font-size: 1rem !important;
+    min-width: unset !important;
   }
   .table-avatar {
-    width: 45px;
-    height: 45px;
+    width: 45px !important;
+    height: 45px !important;
   }
 }
 
 @media (max-width: 640px) {
   .users-table thead {
-    display: none;
+    display: none !important;
   }
   .users-table tbody tr {
-    display: block;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 1rem;
+    display: block !important;
+    margin-bottom: 1rem !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+    padding-bottom: 1rem !important;
   }
   .users-table tbody td {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.6rem 0;
-    text-align: right;
+    display: flex !important;
+    justify-content: space-between !important;
+    padding: 0.6rem 0 !important;
+    text-align: right !important;
   }
   .users-table tbody td::before {
-    content: attr(data-label);
-    flex: 1;
-    text-align: left;
-    font-weight: 600;
-    color: #a5b4fc;
+    content: attr(data-label) !important;
+    flex: 1 !important;
+    text-align: left !important;
+    font-weight: 600 !important;
+    color: #a5b4fc !important;
   }
 }

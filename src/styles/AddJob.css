@@ -1,58 +1,65 @@
 /* ===== Container ===== */
 .jobform-container {
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #1e293b; /* Dark blue-gray background */
-  color: #f0f9ff;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 750px !important;
+  margin: 2rem auto !important;
+  padding: 2rem !important;
+  background: linear-gradient(180deg, #1e3a8a, #000000) !important;
+  color: #f0f9ff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.7) !important;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
 /* Heading */
 .jobform-container h2 {
-  font-size: 1.8rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #e0e0ff;
+  font-size: 2rem !important;
+  text-align: center !important;
+  margin-bottom: 1.5rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
 }
 
 /* Form wrapper */
 .jobform-container form {
-  background: #0f172a; /* Darker card */
-  padding: 1.8rem;
-  border-radius: 12px;
-  box-shadow: inset 0 2px 6px rgba(255,255,255,0.03);
+  background: #0f172a !important;
+  padding: 2rem !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.05) !important;
 }
 
-/* Form labels */
+/* Groups */
+.form-group {
+  margin-bottom: 1.2rem !important;
+}
+
+/* Labels */
 .jobform-container label {
-  font-weight: 600;
-  color: #cbd5e1;
+  font-weight: 600 !important;
+  color: #cbd5e1 !important;
+  margin-bottom: 0.4rem !important;
+  display: inline-block !important;
 }
 
 /* Input fields & textarea */
 .jobform-container input,
 .jobform-container select,
 .jobform-container textarea {
-  width: 100%;
-  padding: 0.55rem 0.75rem;
-  margin-top: 0.3rem;
-  border-radius: 8px;
-  border: 1px solid #334155;
-  background: #1e293b;
-  color: #f0f9ff;
-  font-size: 1rem;
-  transition: all 0.2s ease-in-out;
+  width: 100% !important;
+  padding: 0.65rem 0.9rem !important;
+  border-radius: 10px !important;
+  border: 1px solid #334155 !important;
+  background: #1e293b !important;
+  color: #f0f9ff !important;
+  font-size: 1rem !important;
+  transition: all 0.2s ease-in-out !important;
 }
 
 .jobform-container input:focus,
 .jobform-container select:focus,
 .jobform-container textarea:focus {
-  outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 5px #4f46e5;
+  outline: none !important;
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 6px #4f46e5 !important;
 }
 
 /* Invalid fields */
@@ -61,50 +68,57 @@
 }
 
 .invalid-feedback {
-  color: #f87171;
-  font-size: 0.9rem;
-  margin-top: 0.25rem;
-}
-
-/* Submit button */
-.jobform-container .btn-primary {
-  background: #4f46e5;
-  color: #fff;
-  font-weight: 600;
-  padding: 0.65rem;
-  border-radius: 10px;
-  transition: background 0.2s ease-in-out;
-}
-
-.jobform-container .btn-primary:hover {
-  background: #4338ca;
-}
-
-/* Success message */
-.alert-success {
-  text-align: center;
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  background-color: #10b981;
-  color: #fff;
-  font-weight: 600;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  color: #f87171 !important;
+  font-size: 0.9rem !important;
+  margin-top: 0.25rem !important;
 }
 
 /* File input */
 .jobform-container input[type="file"] {
-  padding: 0.4rem;
-  border-radius: 8px;
+  padding: 0.4rem !important;
+  border-radius: 8px !important;
+  background: #1e293b !important;
+  color: #fff !important;
+}
+
+/* Submit button */
+.btn-submit {
+  display: block !important;
+  width: 100% !important;
+  padding: 0.75rem !important;
+  background: #3b82f6 !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+  border: none !important;
+  transition: background 0.2s ease-in-out !important;
+  cursor: pointer !important;
+  font-size: 1rem !important;
+}
+
+.btn-submit:hover {
+  background: #2563eb !important;
+}
+
+/* Success message */
+.alert-success {
+  text-align: center !important;
+  padding: 0.8rem 1rem !important;
+  border-radius: 8px !important;
+  margin-bottom: 1.5rem !important;
+  background-color: #10b981 !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* Responsive */
 @media (max-width: 640px) {
   .jobform-container {
-    padding: 1rem;
+    padding: 1rem !important;
   }
 
   .jobform-container form {
-    padding: 1rem;
+    padding: 1rem !important;
   }
 }

@@ -22,7 +22,7 @@ function AddJob() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // 🔹 Validation
+  // Validation
   const validate = () => {
     let temp = {};
     if (!formData.companyName.trim()) temp.companyName = "Company name is required";
@@ -38,7 +38,7 @@ function AddJob() {
     return Object.keys(temp).length === 0;
   };
 
-  // 🔹 Handle input change
+  // Handle input change
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "companyImage") {
@@ -48,7 +48,7 @@ function AddJob() {
     }
   };
 
-  // 🔹 Submit form
+  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -66,8 +66,6 @@ function AddJob() {
       data.append("jobType", formData.jobType);
       data.append("experience", formData.experience);
       if (formData.companyImage) data.append("companyImage", formData.companyImage);
-
-      // ✅ Send skills as plain CSV string
       data.append("skills", formData.skills);
 
       await axios.post(`${API_BASE}/jobs`, data, {
@@ -100,86 +98,86 @@ function AddJob() {
 
   return (
     <div className="jobform-container">
-      <h2 className="mb-4 text-center">Add New Job</h2>
+      <h2>Add New Job</h2>
 
       {submitted && (
-        <div className="alert alert-success">Job posted successfully!</div>
+        <div className="alert-success">✅ Job posted successfully!</div>
       )}
 
-      <form onSubmit={handleSubmit} className="p-4 rounded shadow-sm bg-light">
+      <form onSubmit={handleSubmit}>
         {/* Company name */}
-        <div className="mb-3">
-          <label className="form-label">Company Name</label>
+        <div className="form-group">
+          <label>Company Name</label>
           <input
             type="text"
             name="companyName"
             value={formData.companyName}
             onChange={handleChange}
-            className={`form-control ${errors.companyName ? "is-invalid" : ""}`}
+            className={errors.companyName ? "is-invalid" : ""}
           />
-          <div className="invalid-feedback">{errors.companyName}</div>
+          {errors.companyName && <div className="invalid-feedback">{errors.companyName}</div>}
         </div>
 
         {/* Title */}
-        <div className="mb-3">
-          <label className="form-label">Job Title</label>
+        <div className="form-group">
+          <label>Job Title</label>
           <input
             type="text"
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className={`form-control ${errors.title ? "is-invalid" : ""}`}
+            className={errors.title ? "is-invalid" : ""}
           />
-          <div className="invalid-feedback">{errors.title}</div>
+          {errors.title && <div className="invalid-feedback">{errors.title}</div>}
         </div>
 
         {/* Description */}
-        <div className="mb-3">
-          <label className="form-label">Description</label>
+        <div className="form-group">
+          <label>Description</label>
           <textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
             rows="4"
-            className={`form-control ${errors.description ? "is-invalid" : ""}`}
+            className={errors.description ? "is-invalid" : ""}
           ></textarea>
-          <div className="invalid-feedback">{errors.description}</div>
+          {errors.description && <div className="invalid-feedback">{errors.description}</div>}
         </div>
 
         {/* Skills */}
-        <div className="mb-3">
-          <label className="form-label">Skills (comma separated)</label>
+        <div className="form-group">
+          <label>Skills (comma separated)</label>
           <input
             type="text"
             name="skills"
             value={formData.skills}
             onChange={handleChange}
-            className={`form-control ${errors.skills ? "is-invalid" : ""}`}
+            className={errors.skills ? "is-invalid" : ""}
           />
-          <div className="invalid-feedback">{errors.skills}</div>
+          {errors.skills && <div className="invalid-feedback">{errors.skills}</div>}
         </div>
 
         {/* Location */}
-        <div className="mb-3">
-          <label className="form-label">Location</label>
+        <div className="form-group">
+          <label>Location</label>
           <input
             type="text"
             name="location"
             value={formData.location}
             onChange={handleChange}
-            className={`form-control ${errors.location ? "is-invalid" : ""}`}
+            className={errors.location ? "is-invalid" : ""}
           />
-          <div className="invalid-feedback">{errors.location}</div>
+          {errors.location && <div className="invalid-feedback">{errors.location}</div>}
         </div>
 
         {/* Job Type */}
-        <div className="mb-3">
-          <label className="form-label">Job Type</label>
+        <div className="form-group">
+          <label>Job Type</label>
           <select
             name="jobType"
             value={formData.jobType}
             onChange={handleChange}
-            className={`form-select ${errors.jobType ? "is-invalid" : ""}`}
+            className={errors.jobType ? "is-invalid" : ""}
           >
             <option value="">Select type</option>
             <option value="Full-Time">Full-Time</option>
@@ -187,17 +185,17 @@ function AddJob() {
             <option value="Internship">Internship</option>
             <option value="Contract">Contract</option>
           </select>
-          <div className="invalid-feedback">{errors.jobType}</div>
+          {errors.jobType && <div className="invalid-feedback">{errors.jobType}</div>}
         </div>
 
         {/* Experience */}
-        <div className="mb-3">
-          <label className="form-label">Experience</label>
+        <div className="form-group">
+          <label>Experience</label>
           <select
             name="experience"
             value={formData.experience}
             onChange={handleChange}
-            className={`form-select ${errors.experience ? "is-invalid" : ""}`}
+            className={errors.experience ? "is-invalid" : ""}
           >
             <option value="">Select experience</option>
             <option value="Fresher">Fresher</option>
@@ -206,35 +204,34 @@ function AddJob() {
             <option value="3-5 Years">3-5 Years</option>
             <option value="5+ Years">5+ Years</option>
           </select>
-          <div className="invalid-feedback">{errors.experience}</div>
+          {errors.experience && <div className="invalid-feedback">{errors.experience}</div>}
         </div>
 
         {/* Salary */}
-        <div className="mb-3">
-          <label className="form-label">Salary</label>
+        <div className="form-group">
+          <label>Salary</label>
           <input
             type="number"
             name="salary"
             value={formData.salary}
             onChange={handleChange}
-            className={`form-control ${errors.salary ? "is-invalid" : ""}`}
+            className={errors.salary ? "is-invalid" : ""}
           />
-          <div className="invalid-feedback">{errors.salary}</div>
+          {errors.salary && <div className="invalid-feedback">{errors.salary}</div>}
         </div>
 
         {/* Company Image */}
-        <div className="mb-3">
-          <label className="form-label">Company Image</label>
+        <div className="form-group">
+          <label>Company Image</label>
           <input
             type="file"
             name="companyImage"
             accept="image/*"
             onChange={handleChange}
-            className="form-control"
           />
         </div>
 
-        <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+        <button type="submit" className="btn-submit" disabled={loading}>
           {loading ? "Posting..." : "Add Job"}
         </button>
       </form>

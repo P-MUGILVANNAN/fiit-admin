@@ -15,6 +15,24 @@ import axios from "axios";
 import "../styles/Header.css";
 import Logo from "../assets/Logo.png";
 
+const DISMISSED_KEY = "dismissedNotifications";
+
+function readDismissed() {
+  try {
+    const raw = localStorage.getItem(DISMISSED_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return new Set(Array.isArray(arr) ? arr : []);
+  } catch {
+    return new Set();
+  }
+}
+
+function persistDismissed(addIds = []) {
+  const cur = readDismissed();
+  addIds.forEach((id) => id && cur.add(id));
+  localStorage.setItem(DISMISSED_KEY, JSON.stringify([...cur]));
+}
+
 export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,15 +49,12 @@ export default function Header() {
     { path: "/applications", label: "Applications", icon: <Inbox /> },
   ];
 
-  // 🔹 Fetch latest applications for notifications
+  // 🔹 Fetch latest applications for notifications, minus dismissed ones
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
         const token = localStorage.getItem("token");
-        if (!token) {
-          console.warn("No token found, skipping notifications fetch");
-          return;
-        }
+        if (!token) return;
 
         const res = await axios.get(
           "https://jobs-backend-z4z9.onrender.com/api/admin/applications?page=1&limit=10",
@@ -50,17 +65,16 @@ export default function Header() {
           }
         );
 
-        if (res.data?.applications) {
-          setNotifications(res.data.applications);
-        }
+        const apps = res.data?.applications || [];
+        const dismissed = readDismissed();
+        const filtered = apps.filter((n) => n && !dismissed.has(n._id));
+        setNotifications(filtered);
       } catch (err) {
         console.error("Failed to fetch notifications", err);
       }
     };
 
     fetchNotifications();
-
-    // Poll every 20 seconds
     const interval = setInterval(fetchNotifications, 20000);
     return () => clearInterval(interval);
   }, []);
@@ -78,7 +92,9 @@ export default function Header() {
     navigate("/");
   };
 
+  // 🔹 Persist clear so they stay cleared after reload
   const clearNotifications = () => {
+    persistDismissed(notifications.map((n) => n?._id).filter(Boolean));
     setNotifications([]);
   };
 
@@ -132,12 +148,12 @@ export default function Header() {
             <div className="notification-wrapper">
               <button
                 type="button"
-                className="btn btn-sm btn-outline-light position-relative"
+                className="btn btn-sm btn-outline-light position-relative notif-btn"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 <Bell />
                 {notifications.length > 0 && (
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill notif-badge">
                     {notifications.length}
                   </span>
                 )}
@@ -148,7 +164,7 @@ export default function Header() {
                   <div className="dropdown-header d-flex justify-content-between align-items-center">
                     <span>Notifications</span>
                     <button
-                      className="btn btn-link btn-sm text-danger"
+                      className="btn clear-btn"
                       onClick={clearNotifications}
                     >
                       Clear All
@@ -164,7 +180,7 @@ export default function Header() {
                       ))}
                     </ul>
                   ) : (
-                    <p className="text-muted text-center p-2">
+                    <p className="text-muted text-center p-2 m-0 no-notifs">
                       No notifications
                     </p>
                   )}

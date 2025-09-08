@@ -22,7 +22,7 @@ const JobDetails = () => {
         setJob(res.data);
       } catch (err) {
         setError("Failed to load job details.");
-        setShowErrorModal(true); // 🔹 show error modal
+        setShowErrorModal(true);
       } finally {
         setLoading(false);
       }
@@ -37,18 +37,19 @@ const JobDetails = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setShowDeleteModal(false);
-      navigate("/jobs"); // ✅ go back to jobs
+      navigate("/jobs");
     } catch (err) {
       setError("Error deleting job.");
-      setShowErrorModal(true); // 🔹 show error modal
+      setShowErrorModal(true);
     }
   };
 
   if (loading) {
     return (
-      <div className="modal-overlay">
-        <div className="modal-box">
-          <h3>Loading job details...</h3>
+      <div className="loading-overlay">
+        <div className="loading-box">
+          <div className="spinner"></div>
+          <p>Loading job details...</p>
         </div>
       </div>
     );
@@ -99,17 +100,17 @@ const JobDetails = () => {
           className="btn btn-primary"
           onClick={() => navigate(`/admin/jobs/edit/${id}`)}
         >
-          Edit Job
+          ✏️ Edit Job
         </button>
         <button
           className="btn btn-danger"
           onClick={() => setShowDeleteModal(true)}
         >
-          Delete Job
+          🗑 Delete Job
         </button>
       </div>
 
-      {/* 🔹 Delete Confirmation Modal */}
+      {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal-box">
@@ -129,7 +130,7 @@ const JobDetails = () => {
         </div>
       )}
 
-      {/* 🔹 Error Modal */}
+      {/* Error Modal */}
       {showErrorModal && (
         <div className="modal-overlay">
           <div className="modal-box error-box">

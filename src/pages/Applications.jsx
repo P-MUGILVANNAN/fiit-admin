@@ -136,24 +136,26 @@ const Applications = () => {
                 </td>
                 <td>{new Date(app.appliedAt).toLocaleDateString()}</td>
                 <td>
-                  <select
-                    className="status-select"
-                    value={app.status}
-                    onChange={(e) =>
-                      handleStatusChange(app, e.target.value)
-                    }
-                  >
-                    <option value="applied">Applied</option>
-                    <option value="shortlisted">Shortlisted</option>
-                    <option value="accepted">Accepted</option>
-                    <option value="rejected">Rejected</option>
-                  </select>
-                  <button
-                    className="btn btn-secondary"
-                    onClick={() => handleNotify(app._id)}
-                  >
-                    Notify
-                  </button>
+                  <div className="status-actions">
+                    <select
+                      className="status-select"
+                      value={app.status}
+                      onChange={(e) =>
+                        handleStatusChange(app, e.target.value)
+                      }
+                    >
+                      <option value="applied">Applied</option>
+                      <option value="shortlisted">Shortlisted</option>
+                      <option value="accepted">Accepted</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => handleNotify(app._id)}
+                    >
+                      Notify
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

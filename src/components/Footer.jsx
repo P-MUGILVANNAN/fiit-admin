@@ -5,10 +5,7 @@ export default function Footer() {
     <footer className="footer bg-dark text-light py-3 mt-auto">
       <div className="container d-flex justify-content-between align-items-center">
         <span className="small">
-          © {new Date().getFullYear()} Admin Panel. All rights reserved.
-        </span>
-        <span className="small">
-          Built with <span className="text-danger">❤</span> & Bootstrap
+          © {new Date().getFullYear()} FIIT Jobs Admin Panel. All rights reserved.
         </span>
       </div>
     </footer>

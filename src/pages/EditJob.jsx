@@ -46,7 +46,11 @@ function EditJob() {
       })
       .catch((err) => {
         console.error("Error fetching job:", err);
-        setModal({ show: true, type: "error", message: "Failed to load job details." });
+        setModal({
+          show: true,
+          type: "error",
+          message: "Failed to load job details.",
+        });
       });
   }, [id]);
 
@@ -65,7 +69,11 @@ function EditJob() {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      setModal({ show: true, type: "success", message: "Job updated successfully!" });
+      setModal({
+        show: true,
+        type: "success",
+        message: "Job updated successfully!",
+      });
     } catch (err) {
       console.error("Error updating job:", err);
       setModal({
@@ -189,7 +197,11 @@ function EditJob() {
         </div>
 
         <button type="submit" className="btn btn-primary w-100" disabled={loading}>
-          {loading ? "Updating..." : "Update Job"}
+          {loading ? (
+            <div className="spinner"></div>
+          ) : (
+            "Update Job"
+          )}
         </button>
       </form>
 

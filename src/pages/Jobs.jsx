@@ -139,7 +139,7 @@ export default function Jobs() {
                   </td>
                   <td>₹ {job.salary?.toLocaleString()}</td>
                   <td>{new Date(job.createdAt).toLocaleDateString()}</td>
-                  <td className="actions-cell">
+                  <td className="actions-cell mt-2">
                     {confirmDelete === job._id ? (
                       <>
                         <button

@@ -169,7 +169,7 @@ export default function Users() {
                       {user.isSuspicious ? "Suspicious" : "Normal"}
                     </span>
                   </td>
-                  <td className="actions-cell">
+                  <td className="actions-cell mt-2">
                     <button
                       onClick={() =>
                         handleToggleSuspicious(

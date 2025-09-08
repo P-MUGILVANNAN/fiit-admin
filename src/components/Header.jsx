@@ -31,13 +31,25 @@ export default function Header() {
     { path: "/applications", label: "Applications", icon: <Inbox /> },
   ];
 
-  // Fetch latest applications for notifications
+  // 🔹 Fetch latest applications for notifications
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          console.warn("No token found, skipping notifications fetch");
+          return;
+        }
+
         const res = await axios.get(
-          "https://jobs-backend-z4z9.onrender.com/api/applications?limit=5&sort=desc"
+          "https://jobs-backend-z4z9.onrender.com/api/admin/applications?page=1&limit=10",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
+
         if (res.data?.applications) {
           setNotifications(res.data.applications);
         }

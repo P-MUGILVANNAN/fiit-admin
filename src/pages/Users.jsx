@@ -1,3 +1,4 @@
+// src/pages/Users.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/User.css";
@@ -6,8 +7,10 @@ const API_BASE = "https://jobs-backend-z4z9.onrender.com/api";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -17,6 +20,7 @@ export default function Users() {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(res.data.users || []);
+        setFilteredUsers(res.data.users || []);
       } catch (err) {
         console.error("Error fetching users:", err);
         if (err.response?.status === 401) {
@@ -33,22 +37,50 @@ export default function Users() {
     fetchUsers();
   }, []);
 
-  const handleDeleteUser = async (userId) => {
-    if (!window.confirm("Are you sure you want to delete this user?")) return;
+  // 🔍 Search handler
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setFilteredUsers(users);
+    } else {
+      const query = searchQuery.toLowerCase();
+      setFilteredUsers(
+        users.filter(
+          (u) =>
+            u.name?.toLowerCase().includes(query) ||
+            u.email?.toLowerCase().includes(query) ||
+            u.phone?.toLowerCase().includes(query)
+        )
+      );
+    }
+  }, [searchQuery, users]);
+
+  // Delete user with confirm()
+  const handleDeleteUser = async (userId, userName) => {
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete user "${userName}"?`
+    );
+    if (!confirmDelete) return;
+
     try {
       const token = localStorage.getItem("token");
       await axios.delete(`${API_BASE}/admin/users/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers((prev) => prev.filter((u) => u._id !== userId));
-      alert("User deleted successfully");
+      alert(`User "${userName}" deleted successfully ✅`);
     } catch (err) {
       console.error("Error deleting user:", err);
-      alert("Failed to delete user");
+      alert(`❌ Failed to delete user "${userName}"`);
     }
   };
 
-  const handleToggleSuspicious = async (userId, currentStatus) => {
+  // Toggle suspicious status with confirm()
+  const handleToggleSuspicious = async (userId, currentStatus, userName) => {
+    const confirmToggle = window.confirm(
+      `Mark user "${userName}" as ${currentStatus ? "Normal" : "Suspicious"}?`
+    );
+    if (!confirmToggle) return;
+
     try {
       const token = localStorage.getItem("token");
       await axios.patch(
@@ -63,20 +95,40 @@ export default function Users() {
         )
       );
 
-      alert(`User marked as ${!currentStatus ? "suspicious" : "normal"}`);
+      alert(
+        `User "${userName}" marked as ${
+          !currentStatus ? "Suspicious 🚨" : "Normal ✅"
+        }`
+      );
     } catch (err) {
       console.error("Error toggling suspicious status:", err);
-      alert("Failed to update user status");
+      alert(`❌ Failed to update user "${userName}" status`);
     }
   };
 
-  if (loading) return <p className="loading">Loading users...</p>;
+  if (loading)
+    return (
+      <div className="spinner-container">
+        <div className="spinner"></div>
+        <p>Loading users...</p>
+      </div>
+    );
+
   if (error) return <p className="error">{error}</p>;
-  if (!users.length) return <p className="no-data">No users found.</p>;
 
   return (
     <div className="user-list-container">
-      <h1>User Management</h1>
+      <div className="user-header">
+        <h1>👥 User Management</h1>
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="🔍 Search by name, email, or phone..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+
       <div className="table-wrapper">
         <table className="users-table">
           <thead>
@@ -90,58 +142,72 @@ export default function Users() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr
-                key={user._id}
-                className={user.isSuspicious ? "suspicious-row" : ""}
-              >
-                <td data-label="Photo">
-                  <img
-                    src={user.profileImage || user.avatar || "/default-avatar.png"}
-                    alt={user.name}
-                    className="table-avatar"
-                  />
-                </td>
-                <td data-label="Name">{user.name || "Unnamed User"}</td>
-                <td data-label="Email">{user.email}</td>
-                <td data-label="Phone">{user.phone || "—"}</td>
-                <td data-label="Status">
-                  <span
-                    className={`status-badge ${
-                      user.isSuspicious ? "suspicious" : "normal"
-                    }`}
-                  >
-                    {user.isSuspicious ? "Suspicious" : "Normal"}
-                  </span>
-                </td>
-                <td data-label="Actions" className="actions-cell">
-                  <button
-                    onClick={() =>
-                      handleToggleSuspicious(user._id, user.isSuspicious)
-                    }
-                    className={`btn-sm ${
-                      user.isSuspicious ? "btn-warning" : "btn-secondary"
-                    }`}
-                  >
-                    {user.isSuspicious ? "Unflag" : "Flag"}
-                  </button>
-                  <button
-                    onClick={() => handleDeleteUser(user._id)}
-                    className="btn-sm btn-danger"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    onClick={() =>
-                      (window.location.href = `/admin/users/${user._id}`)
-                    }
-                    className="btn-sm btn-primary"
-                  >
-                    View
-                  </button>
+            {filteredUsers.length > 0 ? (
+              filteredUsers.map((user, index) => (
+                <tr
+                  key={user._id}
+                  className={`${user.isSuspicious ? "suspicious-row" : ""} ${
+                    index % 2 === 0 ? "striped-row" : ""
+                  }`}
+                >
+                  <td>
+                    <img
+                      src={user.profileImage || user.avatar || "/default-avatar.png"}
+                      alt={user.name}
+                      className="table-avatar"
+                    />
+                  </td>
+                  <td>{user.name || "Unnamed User"}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone || "—"}</td>
+                  <td>
+                    <span
+                      className={`status-badge ${
+                        user.isSuspicious ? "suspicious" : "normal"
+                      }`}
+                    >
+                      {user.isSuspicious ? "Suspicious" : "Normal"}
+                    </span>
+                  </td>
+                  <td className="actions-cell">
+                    <button
+                      onClick={() =>
+                        handleToggleSuspicious(
+                          user._id,
+                          user.isSuspicious,
+                          user.name
+                        )
+                      }
+                      className={`btn-sm ${
+                        user.isSuspicious ? "btn-warning" : "btn-secondary"
+                      }`}
+                    >
+                      {user.isSuspicious ? "Unflag" : "Flag"}
+                    </button>
+                    <button
+                      onClick={() => handleDeleteUser(user._id, user.name)}
+                      className="btn-sm btn-danger"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      onClick={() =>
+                        (window.location.href = `/admin/users/${user._id}`)
+                      }
+                      className="btn-sm btn-primary"
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center", padding: "2rem" }}>
+                  No users found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

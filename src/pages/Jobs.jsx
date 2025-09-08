@@ -13,6 +13,7 @@ export default function Jobs() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [confirmDelete, setConfirmDelete] = useState(null); // job id waiting for confirm
 
   const navigate = useNavigate();
 
@@ -38,7 +39,6 @@ export default function Jobs() {
 
   // 🔹 Delete Job
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this job?")) return;
     try {
       const token = localStorage.getItem("token");
       await axios.delete(`${API_BASE}/jobs/${id}`, {
@@ -46,9 +46,11 @@ export default function Jobs() {
       });
       setJobs((prev) => prev.filter((job) => job._id !== id));
       setFilteredJobs((prev) => prev.filter((job) => job._id !== id));
+      setConfirmDelete(null);
     } catch (err) {
       console.error("Delete error:", err);
-      alert("Failed to delete job");
+      setConfirmDelete(null);
+      alert("Failed to delete job ❌");
     }
   };
 
@@ -68,20 +70,20 @@ export default function Jobs() {
   };
 
   return (
-    <div className="jobs-container">
-      {/* Header with Title, Add Job Button and Search */}
-      <div className="jobs-header">
+    <div className="jobs-list-container">
+      {/* Header */}
+      <div className="job-header">
         <h1>Job Management</h1>
-        <div className="jobs-controls">
+        <div className="job-header-actions">
           <input
             type="text"
             placeholder="Search jobs..."
-            className="search-input"
+            className="search-bar"
             value={searchTerm}
             onChange={handleSearch}
           />
           <button
-            className="btn btn-primary"
+            className="add-job-btn"
             onClick={() => navigate("/jobs/add")}
           >
             + Add Job
@@ -89,9 +91,9 @@ export default function Jobs() {
         </div>
       </div>
 
-      {/* Table / Loading / Error */}
+      {/* Table */}
       {loading ? (
-        <p className="loading">Loading jobs...</p>
+        <div className="spinner"></div>
       ) : error ? (
         <p className="error">{error}</p>
       ) : filteredJobs.length === 0 ? (
@@ -130,26 +132,45 @@ export default function Jobs() {
                   <td>{job.title}</td>
                   <td>{job.location}</td>
                   <td>
-                    <span className="badge badge-primary">{job.jobType}</span>
+                    <span className="status-badge normal">{job.jobType}</span>
                   </td>
                   <td>
-                    <span className="badge badge-info">{job.experience}</span>
+                    <span className="status-badge normal">{job.experience}</span>
                   </td>
                   <td>₹ {job.salary?.toLocaleString()}</td>
                   <td>{new Date(job.createdAt).toLocaleDateString()}</td>
                   <td className="actions-cell">
-                    <button
-                      className="btn-sm btn-secondary"
-                      onClick={() => navigate(`/admin/jobs/${job._id}`)}
-                    >
-                      View
-                    </button>
-                    <button
-                      className="btn-sm btn-danger"
-                      onClick={() => handleDelete(job._id)}
-                    >
-                      Delete
-                    </button>
+                    {confirmDelete === job._id ? (
+                      <>
+                        <button
+                          className="btn-sm btn-danger"
+                          onClick={() => handleDelete(job._id)}
+                        >
+                          Yes
+                        </button>
+                        <button
+                          className="btn-sm btn-secondary"
+                          onClick={() => setConfirmDelete(null)}
+                        >
+                          No
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          className="btn-sm btn-secondary"
+                          onClick={() => navigate(`/admin/jobs/${job._id}`)}
+                        >
+                          View
+                        </button>
+                        <button
+                          className="btn-sm btn-danger"
+                          onClick={() => setConfirmDelete(job._id)}
+                        >
+                          Delete
+                        </button>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}

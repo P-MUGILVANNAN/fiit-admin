@@ -117,6 +117,8 @@ const Applications = () => {
             <tr>
               <th>Applicant</th>
               <th>Email</th>
+              <th>Phone</th>
+              <th>Resume</th>
               <th>Job</th>
               <th>Status</th>
               <th>Applied On</th>
@@ -128,6 +130,21 @@ const Applications = () => {
               <tr key={app._id}>
                 <td>{app.applicant?.name || "N/A"}</td>
                 <td>{app.applicant?.email || "N/A"}</td>
+                <td>{app.applicant?.phone || "N/A"}</td>
+                <td>
+                  {app.applicant?.resume ? (
+                    <a
+                      href={`https://docs.google.com/viewer?url=${app.applicant.resume}&embedded=true`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary btn-sm"
+                    >
+                      View Resume
+                    </a>
+                  ) : (
+                    "N/A"
+                  )}
+                </td>
                 <td>{app.job?.title || "N/A"}</td>
                 <td>
                   <span className={`status-badge ${app.status}`}>

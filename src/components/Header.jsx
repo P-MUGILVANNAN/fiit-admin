@@ -107,7 +107,6 @@ export default function Header() {
           to="/dashboard"
         >
           <img src={Logo} alt="Logo" className="brand-logo" />
-          <span className="fw-bold company-name">FIIT JOBS</span>
         </Link>
 
         {/* Mobile toggle */}

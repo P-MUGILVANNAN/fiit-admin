@@ -147,7 +147,7 @@ export default function Header() {
             <div className="notification-wrapper">
               <button
                 type="button"
-                className="btn btn-sm btn-outline-light position-relative notif-btn"
+                className="position-relative notif-btn"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 <Bell />

@@ -65,6 +65,8 @@
   justify-content: center !important;
   border-radius: 0.5rem !important;
   padding: 0 !important;
+  background-color: skyblue;
+  border: none;
 }
 
 .notif-badge {
@@ -105,13 +107,14 @@
 /* Notification Dropdown */
 .notification-wrapper {
   position: relative !important;
+  display: inline-block !important;
 }
 
 .notification-dropdown {
   position: absolute !important;
   right: 0 !important;
   top: 120% !important;
-  background: #0f172a !important;                 /* dark panel */
+  background: #0f172a !important;
   color: #e5e7eb !important;
   border-radius: 12px !important;
   width: 300px !important;
@@ -122,7 +125,7 @@
   animation: fadeIn 0.25s ease !important;
 }
 
-/* little caret */
+/* Caret */
 .notification-dropdown::before {
   content: "" !important;
   position: absolute !important;
@@ -130,6 +133,22 @@
   right: 14px !important;
   border: 8px solid transparent !important;
   border-bottom-color: #0f172a !important;
+}
+
+/* 📱 Mobile Fix */
+@media (max-width: 576px) {
+  .notification-dropdown {
+    left: 100% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: 60vw !important;   /* almost full width */
+  }
+
+  .notification-dropdown::before {
+    right: 20px !important;  /* keep caret inside */
+    left: auto !important;
+    transform: none !important;
+  }
 }
 
 /* Header row inside dropdown */

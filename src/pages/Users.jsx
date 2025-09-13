@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/User.css";
+import { useNavigate } from "react-router-dom";
+
 
 const API_BASE = "https://jobs-backend-z4z9.onrender.com/api";
 
@@ -11,6 +13,8 @@ export default function Users() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -192,7 +196,7 @@ export default function Users() {
                     </button>
                     <button
                       onClick={() =>
-                        (window.location.href = `/admin/users/${user._id}`)
+                        navigate(`/admin/users/${user._id}`)
                       }
                       className="btn-sm btn-primary"
                     >

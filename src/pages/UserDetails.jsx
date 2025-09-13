@@ -43,7 +43,7 @@ export default function UserDetails() {
 
       <div className="user-profile-header">
         <img
-          src={user.profileImage || user.avatar || "/default-avatar.png"}
+          src={user.profileImage || user.avatar || "https://via.placeholder.com/150"}
           alt={user.name}
           className="user-avatar-lg"
         />

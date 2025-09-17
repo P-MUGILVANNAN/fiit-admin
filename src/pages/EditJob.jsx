@@ -15,6 +15,8 @@ function EditJob() {
     title: "",
     description: "",
     skills: "",
+    qualification: "",
+    category: "",
     location: "",
     salary: "",
     jobType: "",
@@ -38,6 +40,8 @@ function EditJob() {
           title: data.title || "",
           description: data.description || "",
           skills: data.skills ? data.skills.join(",") : "",
+          qualification: data.qualification || "",
+          category: data.category || "",
           location: data.location || "",
           salary: data.salary || "",
           jobType: data.jobType || "",
@@ -134,6 +138,30 @@ function EditJob() {
             name="skills"
             placeholder="e.g. JavaScript, React"
             value={formData.skills}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Qualification</label>
+          <input
+            type="text"
+            name="qualification"
+            placeholder="Enter qualification"
+            value={formData.qualification}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Category</label>
+          <input
+            type="text"
+            name="category"
+            placeholder="Enter category"
+            value={formData.category}
             onChange={handleChange}
             required
           />

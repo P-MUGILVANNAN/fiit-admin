@@ -81,19 +81,10 @@ const JobDetails = () => {
         <p><span>Location:</span> {job.location}</p>
         <p><span>Type:</span> {job.jobType || job.type}</p>
         <p><span>Salary:</span> ₹ {job.salary?.toLocaleString()}</p>
+        <p><span>Category:</span> {job.category}</p>
+        <p><span>Qualification:</span> {job.qualification}</p>
         <p><span>Description:</span> {job.description}</p>
       </div>
-
-      {job.requirements?.length > 0 && (
-        <div className="job-requirements">
-          <h4>Requirements</h4>
-          <ul>
-            {job.requirements.map((req, idx) => (
-              <li key={idx}>{req}</li>
-            ))}
-          </ul>
-        </div>
-      )}
 
       <div className="job-actions">
         <button

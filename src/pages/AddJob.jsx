@@ -1,4 +1,3 @@
-// src/pages/AddJob.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import "../styles/AddJob.css";
@@ -11,6 +10,8 @@ function AddJob() {
     title: "",
     description: "",
     skills: "",
+    qualification: "",
+    category: "",
     location: "",
     salary: "",
     jobType: "",
@@ -29,6 +30,8 @@ function AddJob() {
     if (!formData.title.trim()) temp.title = "Job title is required";
     if (!formData.description.trim()) temp.description = "Description is required";
     if (!formData.skills.trim()) temp.skills = "At least 1 skill is required";
+    if (!formData.qualification.trim()) temp.qualification = "Qualification is required";
+    if (!formData.category.trim()) temp.category = "Category is required";
     if (!formData.location.trim()) temp.location = "Location is required";
     if (!formData.jobType.trim()) temp.jobType = "Job type is required";
     if (!formData.experience.trim()) temp.experience = "Experience is required";
@@ -58,15 +61,9 @@ function AddJob() {
       const token = localStorage.getItem("token");
 
       const data = new FormData();
-      data.append("companyName", formData.companyName);
-      data.append("title", formData.title);
-      data.append("description", formData.description);
-      data.append("location", formData.location);
-      data.append("salary", formData.salary);
-      data.append("jobType", formData.jobType);
-      data.append("experience", formData.experience);
-      if (formData.companyImage) data.append("companyImage", formData.companyImage);
-      data.append("skills", formData.skills);
+      Object.keys(formData).forEach((key) => {
+        if (formData[key]) data.append(key, formData[key]);
+      });
 
       await axios.post(`${API_BASE}/jobs`, data, {
         headers: {
@@ -81,6 +78,8 @@ function AddJob() {
         title: "",
         description: "",
         skills: "",
+        qualification: "",
+        category: "",
         location: "",
         salary: "",
         jobType: "",
@@ -100,9 +99,7 @@ function AddJob() {
     <div className="jobform-container">
       <h2>Add New Job</h2>
 
-      {submitted && (
-        <div className="alert-success">✅ Job posted successfully!</div>
-      )}
+      {submitted && <div className="alert-success">✅ Job posted successfully!</div>}
 
       <form onSubmit={handleSubmit}>
         {/* Company name */}
@@ -155,6 +152,47 @@ function AddJob() {
             className={errors.skills ? "is-invalid" : ""}
           />
           {errors.skills && <div className="invalid-feedback">{errors.skills}</div>}
+        </div>
+
+        {/* Qualification */}
+        <div className="form-group">
+          <label>Qualification</label>
+          <input
+            type="text"
+            name="qualification"
+            value={formData.qualification}
+            onChange={handleChange}
+            className={errors.qualification ? "is-invalid" : ""}
+          />
+          {errors.qualification && (
+            <div className="invalid-feedback">{errors.qualification}</div>
+          )}
+        </div>
+
+        {/* Category */}
+        <div className="form-group">
+          <label>Category</label>
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className={errors.category ? "is-invalid" : ""}
+          >
+            <option value="">Select category</option>
+            <option value="Networking">Networking</option>
+            <option value="Linux">Linux</option>
+            <option value="AWS">AWS</option>
+            <option value="Accounts">Accounts</option>
+            <option value="Developer">Developer</option>
+            <option value="Designer">Designer</option>
+            <option value="DevOps">DevOps</option>
+            <option value="Testing">Testing</option>
+            <option value="Data Analyst">Data Analyst</option>
+            <option value="Data Scientist">Data Scientist</option>
+          </select>
+          {errors.category && (
+            <div className="invalid-feedback">{errors.category}</div>
+          )}
         </div>
 
         {/* Location */}

@@ -1,10 +1,162 @@
 .footer {
-  background: linear-gradient(135deg, #000000, #0d1b4c);
-  color: #ccc;
+  background: #f8f9fa;
+  color: #333333;
   font-size: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid #dee2e6;
 }
 
 .footer .text-danger {
-  color: #1e90ff !important;
+  color: #007bff !important;
+}
+
+.topbar-header {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #dee2e6;
+  padding: 0.75rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-toggle-btn {
+  background: transparent;
+  border: none;
+  color: #333333;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 0.2rem 0.5rem;
+}
+
+.sidebar-toggle-btn:hover {
+  color: #007bff;
+}
+
+/* Notification Button & Badge (styles preserved from original) */
+.notif-btn {
+  width: 38px !important;
+  height: 38px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: none;
+  color: #333333;
+  transition: background-color 0.2s ease;
+}
+
+.notif-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.notif-badge {
+  background: #dc3545 !important;
+  color: #fff !important;
+  border: 2px solid #ffffff !important;
+  font-size: 0.7rem !important;
+  padding: 0.2rem 0.4rem !important;
+}
+
+/* Logout button (styles preserved and tweaked) */
+.btn-logout {
+  background: #dc3545 !important;
+  border: none !important;
+  color: #fff !important;
+  padding: 0.45rem 0.9rem !important;
+  border-radius: 0.5rem !important;
+  font-weight: 500 !important;
+  transition: background 0.2s ease !important;
+}
+
+.btn-logout:hover {
+  background: #c82333 !important;
+}
+
+/* Notification Dropdown (styles preserved) */
+.notification-wrapper {
+  position: relative !important;
+  display: inline-block !important;
+}
+
+.notification-dropdown {
+  position: absolute !important;
+  right: 0 !important;
+  top: 130% !important;
+  background: #ffffff !important;
+  color: #333333 !important;
+  border-radius: 12px !important;
+  width: 320px !important;
+  z-index: 2000 !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid #dee2e6 !important;
+  overflow: hidden !important;
+  animation: fadeIn 0.25s ease !important;
+}
+
+.notification-dropdown::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -8px !important;
+  right: 14px !important;
+  border: 8px solid transparent !important;
+  border-bottom-color: #ffffff !important;
+}
+
+/* Header row inside dropdown */
+.notification-dropdown .dropdown-header {
+  padding: 0.65rem 0.9rem !important;
+  border-bottom: 1px solid #dee2e6 !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+  color: #000000 !important;
+  background: #f8f9fa !important;
+}
+
+/* Clear button */
+.notification-dropdown .clear-btn {
+  background: transparent !important;
+  color: #dc3545 !important;
+  border: none !important;
+  padding: 0.2rem 0.4rem !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+}
+.notification-dropdown .clear-btn:hover {
+  color: #c82333 !important;
+}
+
+/* List & items */
+.notification-dropdown ul {
+  max-height: 260px !important;
+  overflow-y: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.notification-item {
+  padding: 0.7rem 0.9rem !important;
+  border-bottom: 1px solid #e9ecef !important;
+  font-size: 0.9rem !important;
+}
+.notification-item:hover {
+  background: #f8f9fa !important;
+}
+.no-notifs {
+  padding: 1.5rem !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 576px) {
+  .topbar-header {
+    padding: 0.5rem 1rem;
+  }
 }

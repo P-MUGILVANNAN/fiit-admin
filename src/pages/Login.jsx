@@ -147,7 +147,7 @@ function Login() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <label>Email</label>
+            <label className="text-dark">Email</label>
             <div className="input-container">
               <input
                 type="email"
@@ -169,7 +169,7 @@ function Login() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <label>Password</label>
+            <label className="text-dark">Password</label>
             <div className="input-container">
               <input
                 type="password"

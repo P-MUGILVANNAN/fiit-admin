@@ -2,10 +2,10 @@
   max-width: 1200px !important;
   margin: 2rem auto !important;
   padding: 2rem !important;
-  background: linear-gradient(180deg, #1e3a8a, #000) !important;
+  background: #ffffff !important;
   border-radius: 16px !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7) !important;
-  color: #f0f9ff !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1) !important;
+  color: #333333 !important;
   font-size: 1rem !important;
 }
 
@@ -21,52 +21,55 @@
   margin: 0 !important;
   font-size: 1.8rem !important;
   font-weight: 700 !important;
+  color: #000000 !important;
 }
 
 .search-input {
   width: 300px !important;
   padding: 0.75rem 1rem !important;
   border-radius: 8px !important;
-  border: 1px solid #334155 !important;
-  background: #1e293b !important;
-  color: #f0f9ff !important;
+  border: 1px solid #ced4da !important;
+  background: #f8f9fa !important;
+  color: #333333 !important;
   font-size: 1rem !important;
 }
 
 .search-input:focus {
-  border-color: #4f46e5 !important;
+  border-color: #80bdff !important;
   outline: none !important;
-  box-shadow: 0 0 6px #4f46e5 !important;
+  box-shadow: 0 0 6px #80bdff !important;
 }
 
 /* Table */
 .table-wrapper {
   overflow-x: auto !important;
   border-radius: 12px !important;
+  border: 1px solid #dee2e6 !important;
 }
 
 .applications-table {
   width: 100% !important;
   border-collapse: collapse !important;
   font-size: 1.05rem !important;
-  background: #0f172a !important;
-  color: #f0f9ff !important;
+  background: #ffffff !important;
+  color: #333333 !important;
   border-radius: 12px !important;
   overflow: hidden !important;
 }
 
 .applications-table th {
-  background: #1e3a8a !important;
-  color: #fff !important;
+  background: #f8f9fa !important;
+  color: #000000 !important;
   padding: 1rem !important;
   text-align: left !important;
   font-weight: 700 !important;
   font-size: 1.05rem !important;
+  border-bottom: 2px solid #dee2e6 !important;
 }
 
 .applications-table td {
   padding: 1rem !important;
-  border-bottom: 1px solid #334155 !important;
+  border-bottom: 1px solid #dee2e6 !important;
   font-size: 1rem !important;
 }
 
@@ -80,18 +83,18 @@
   font-size: 0.9rem !important;
 }
 
-.status-badge.applied { background: #6b7280 !important; }
-.status-badge.shortlisted { background: #3b82f6 !important; }
-.status-badge.accepted { background: #10b981 !important; }
-.status-badge.rejected { background: #ef4444 !important; }
+.status-badge.applied { background: #6c757d !important; }
+.status-badge.shortlisted { background: #007bff !important; }
+.status-badge.accepted { background: #28a745 !important; }
+.status-badge.rejected { background: #dc3545 !important; }
 
 /* Select */
 .status-select {
   padding: 0.5rem 0.8rem !important;
   border-radius: 8px !important;
-  border: 1px solid #334155 !important;
-  background: #1e293b !important;
-  color: #fff !important;
+  border: 1px solid #ced4da !important;
+  background: #f8f9fa !important;
+  color: #333333 !important;
   font-size: 0.95rem !important;
 }
 
@@ -113,21 +116,21 @@
 }
 
 .btn-secondary {
-  background: #6b7280 !important;
+  background: #6c757d !important;
   color: #fff !important;
 }
 
 .btn-secondary:hover {
-  background: #4b5563 !important;
+  background: #5a6268 !important;
 }
 
 .btn-primary {
-  background: #3b82f6 !important;
+  background: #007bff !important;
   color: #fff !important;
 }
 
 .btn-primary:hover {
-  background: #2563eb !important;
+  background: #0056b3 !important;
 }
 
 /* Pagination */
@@ -144,7 +147,7 @@
 .modal-overlay {
   position: fixed !important;
   inset: 0 !important;
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: rgba(0, 0, 0, 0.5) !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -152,14 +155,14 @@
 }
 
 .modal-box {
-  background: #1e293b !important;
+  background: #ffffff !important;
   padding: 2rem !important;
   border-radius: 14px !important;
   text-align: center !important;
-  color: #f0f9ff !important;
+  color: #333333 !important;
   max-width: 450px !important;
   width: 90% !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   font-size: 1.05rem !important;
 }
 
@@ -177,12 +180,12 @@
   align-items: center !important;
   justify-content: center !important;
   height: 60vh !important;
-  color: #f0f9ff !important;
+  color: #333333 !important;
 }
 
 .spinner {
-  border: 6px solid #334155 !important;
-  border-top: 6px solid #3b82f6 !important;
+  border: 6px solid #e9ecef !important;
+  border-top: 6px solid #007bff !important;
   border-radius: 50% !important;
   width: 60px !important;
   height: 60px !important;

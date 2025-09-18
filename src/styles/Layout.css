@@ -1,8 +1,8 @@
 .app-layout {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0d1b4c, #000000);
-  color: #e0e0e0;
+  background: #f8f9fa;
+  color: #333333;
   position: relative;
   overflow-x: hidden;
 }
@@ -36,7 +36,7 @@
 .sidebar-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1045; /* Below sidebar (1050) */
   display: none;
 }

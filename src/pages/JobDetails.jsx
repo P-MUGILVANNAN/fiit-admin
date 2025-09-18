@@ -60,6 +60,7 @@ const JobDetails = () => {
       <div className="modal-overlay">
         <div className="modal-box">
           <h3>Job not found</h3>
+          <p>The job you're looking for doesn't exist or has been removed.</p>
           <button className="btn btn-primary" onClick={() => navigate("/jobs")}>
             Back to Jobs
           </button>
@@ -70,51 +71,86 @@ const JobDetails = () => {
 
   return (
     <div className="job-details-container">
-      <h2>{job.title}</h2>
-
-      {job.companyImage && (
-        <img src={job.companyImage} alt={job.company} className="company-img" />
-      )}
-
-      <div className="job-info">
-        <p><span>Company:</span> {job.companyName}</p>
-        <p><span>Location:</span> {job.location}</p>
-        <p><span>Type:</span> {job.jobType || job.type}</p>
-        <p><span>Salary:</span> ₹ {job.salary?.toLocaleString()}</p>
-        <p><span>Category:</span> {job.category}</p>
-        <p><span>Qualification:</span> {job.qualification}</p>
-        <p><span>Description:</span> {job.description}</p>
+      <div className="job-details-header">
+        <div className="company-info">
+          {job.companyImage && (
+            <img src={job.companyImage} alt={job.company} className="company-img" />
+          )}
+          <div className="company-details">
+            <h1>{job.title}</h1>
+            <h2>{job.companyName}</h2>
+            <div className="job-meta">
+              <span className="location">{job.location}</span>
+              <span className="job-type">{job.jobType || job.type}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div className="salary-badge">
+          <span className="salary-amount">₹{job.salary?.toLocaleString()}</span>
+          <span className="salary-label">per year</span>
+        </div>
       </div>
 
-      <div className="job-actions">
-        <button
-          className="btn btn-primary"
-          onClick={() => navigate(`/admin/jobs/edit/${id}`)}
-        >
-          ✏️ Edit Job
-        </button>
-        <button
-          className="btn btn-danger"
-          onClick={() => setShowDeleteModal(true)}
-        >
-          🗑 Delete Job
-        </button>
+      <div className="job-content">
+        <div className="job-details-grid">
+          <div className="detail-card">
+            <div className="detail-icon">📁</div>
+            <div className="detail-content">
+              <h3>Category</h3>
+              <p>{job.category}</p>
+            </div>
+          </div>
+          
+          <div className="detail-card">
+            <div className="detail-icon">🎓</div>
+            <div className="detail-content">
+              <h3>Qualification</h3>
+              <p>{job.qualification}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="description-section">
+          <h3>Job Description</h3>
+          <p>{job.description}</p>
+        </div>
+        
+        <div className="job-actions">
+          <button
+            className="btn btn-secondary"
+            onClick={() => navigate(-1)}
+          >
+            ← Back
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate(`/admin/jobs/edit/${id}`)}
+          >
+            ✏️ Edit Job
+          </button>
+          <button
+            className="btn btn-danger"
+            onClick={() => setShowDeleteModal(true)}
+          >
+            🗑 Delete Job
+          </button>
+        </div>
       </div>
 
       {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className="modal-overlay">
           <div className="modal-box">
-            <h3>Are you sure you want to delete this job?</h3>
+            <div className="modal-icon">⚠️</div>
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete this job posting? This action cannot be undone.</p>
             <div className="modal-actions">
+              <button className="btn btn-secondary" onClick={() => setShowDeleteModal(false)}>
+                Cancel
+              </button>
               <button className="btn btn-danger" onClick={handleDelete}>
                 Yes, Delete
-              </button>
-              <button
-                className="btn btn-secondary"
-                onClick={() => setShowDeleteModal(false)}
-              >
-                Cancel
               </button>
             </div>
           </div>
@@ -125,7 +161,8 @@ const JobDetails = () => {
       {showErrorModal && (
         <div className="modal-overlay">
           <div className="modal-box error-box">
-            <h3>⚠️ Oops!</h3>
+            <div className="modal-icon">❌</div>
+            <h3>Oops! Something went wrong</h3>
             <p>{error}</p>
             <button
               className="btn btn-primary"

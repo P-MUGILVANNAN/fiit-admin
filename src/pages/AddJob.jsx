@@ -97,39 +97,51 @@ function AddJob() {
 
   return (
     <div className="jobform-container">
-      <h2>Add New Job</h2>
+      <div className="jobform-header">
+        <h2>Add New Job</h2>
+        <p>Fill in the details below to post a new job opening</p>
+      </div>
 
-      {submitted && <div className="alert-success">✅ Job posted successfully!</div>}
-
-      <form onSubmit={handleSubmit}>
-        {/* Company name */}
-        <div className="form-group">
-          <label>Company Name</label>
-          <input
-            type="text"
-            name="companyName"
-            value={formData.companyName}
-            onChange={handleChange}
-            className={errors.companyName ? "is-invalid" : ""}
-          />
-          {errors.companyName && <div className="invalid-feedback">{errors.companyName}</div>}
+      {submitted && (
+        <div className="alert-success">
+          <span className="success-icon">✓</span>
+          Job posted successfully!
         </div>
+      )}
 
-        {/* Title */}
-        <div className="form-group">
-          <label>Job Title</label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            className={errors.title ? "is-invalid" : ""}
-          />
-          {errors.title && <div className="invalid-feedback">{errors.title}</div>}
+      <form onSubmit={handleSubmit} className="job-form">
+        <div className="form-row">
+          {/* Company name */}
+          <div className="form-group">
+            <label>Company Name</label>
+            <input
+              type="text"
+              name="companyName"
+              value={formData.companyName}
+              onChange={handleChange}
+              className={errors.companyName ? "is-invalid" : ""}
+              placeholder="Enter company name"
+            />
+            {errors.companyName && <div className="invalid-feedback">{errors.companyName}</div>}
+          </div>
+
+          {/* Title */}
+          <div className="form-group">
+            <label>Job Title</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              className={errors.title ? "is-invalid" : ""}
+              placeholder="Enter job title"
+            />
+            {errors.title && <div className="invalid-feedback">{errors.title}</div>}
+          </div>
         </div>
 
         {/* Description */}
-        <div className="form-group">
+        <div className="form-group full-width">
           <label>Description</label>
           <textarea
             name="description"
@@ -137,140 +149,169 @@ function AddJob() {
             onChange={handleChange}
             rows="4"
             className={errors.description ? "is-invalid" : ""}
+            placeholder="Describe the job responsibilities and requirements"
           ></textarea>
           {errors.description && <div className="invalid-feedback">{errors.description}</div>}
         </div>
 
-        {/* Skills */}
-        <div className="form-group">
-          <label>Skills (comma separated)</label>
-          <input
-            type="text"
-            name="skills"
-            value={formData.skills}
-            onChange={handleChange}
-            className={errors.skills ? "is-invalid" : ""}
-          />
-          {errors.skills && <div className="invalid-feedback">{errors.skills}</div>}
+        <div className="form-row">
+          {/* Skills */}
+          <div className="form-group">
+            <label>Skills (comma separated)</label>
+            <input
+              type="text"
+              name="skills"
+              value={formData.skills}
+              onChange={handleChange}
+              className={errors.skills ? "is-invalid" : ""}
+              placeholder="e.g. JavaScript, React, Node.js"
+            />
+            {errors.skills && <div className="invalid-feedback">{errors.skills}</div>}
+          </div>
+
+          {/* Qualification */}
+          <div className="form-group">
+            <label>Qualification</label>
+            <input
+              type="text"
+              name="qualification"
+              value={formData.qualification}
+              onChange={handleChange}
+              className={errors.qualification ? "is-invalid" : ""}
+              placeholder="Required qualifications"
+            />
+            {errors.qualification && (
+              <div className="invalid-feedback">{errors.qualification}</div>
+            )}
+          </div>
         </div>
 
-        {/* Qualification */}
-        <div className="form-group">
-          <label>Qualification</label>
-          <input
-            type="text"
-            name="qualification"
-            value={formData.qualification}
-            onChange={handleChange}
-            className={errors.qualification ? "is-invalid" : ""}
-          />
-          {errors.qualification && (
-            <div className="invalid-feedback">{errors.qualification}</div>
-          )}
+        <div className="form-row">
+          {/* Category */}
+          <div className="form-group">
+            <label>Category</label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className={errors.category ? "is-invalid" : ""}
+            >
+              <option value="">Select category</option>
+              <option value="Networking">Networking</option>
+              <option value="Linux">Linux</option>
+              <option value="AWS">AWS</option>
+              <option value="Accounts">Accounts</option>
+              <option value="Developer">Developer</option>
+              <option value="Designer">Designer</option>
+              <option value="DevOps">DevOps</option>
+              <option value="Testing">Testing</option>
+              <option value="Data Analyst">Data Analyst</option>
+              <option value="Data Scientist">Data Scientist</option>
+            </select>
+            {errors.category && (
+              <div className="invalid-feedback">{errors.category}</div>
+            )}
+          </div>
+
+          {/* Location */}
+          <div className="form-group">
+            <label>Location</label>
+            <input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+              className={errors.location ? "is-invalid" : ""}
+              placeholder="e.g. New York, Remote"
+            />
+            {errors.location && <div className="invalid-feedback">{errors.location}</div>}
+          </div>
         </div>
 
-        {/* Category */}
-        <div className="form-group">
-          <label>Category</label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            className={errors.category ? "is-invalid" : ""}
-          >
-            <option value="">Select category</option>
-            <option value="Networking">Networking</option>
-            <option value="Linux">Linux</option>
-            <option value="AWS">AWS</option>
-            <option value="Accounts">Accounts</option>
-            <option value="Developer">Developer</option>
-            <option value="Designer">Designer</option>
-            <option value="DevOps">DevOps</option>
-            <option value="Testing">Testing</option>
-            <option value="Data Analyst">Data Analyst</option>
-            <option value="Data Scientist">Data Scientist</option>
-          </select>
-          {errors.category && (
-            <div className="invalid-feedback">{errors.category}</div>
-          )}
+        <div className="form-row">
+          {/* Job Type */}
+          <div className="form-group">
+            <label>Job Type</label>
+            <select
+              name="jobType"
+              value={formData.jobType}
+              onChange={handleChange}
+              className={errors.jobType ? "is-invalid" : ""}
+            >
+              <option value="">Select type</option>
+              <option value="Full-Time">Full-Time</option>
+              <option value="Part-Time">Part-Time</option>
+              <option value="Internship">Internship</option>
+              <option value="Contract">Contract</option>
+            </select>
+            {errors.jobType && <div className="invalid-feedback">{errors.jobType}</div>}
+          </div>
+
+          {/* Experience */}
+          <div className="form-group">
+            <label>Experience</label>
+            <select
+              name="experience"
+              value={formData.experience}
+              onChange={handleChange}
+              className={errors.experience ? "is-invalid" : ""}
+            >
+              <option value="">Select experience</option>
+              <option value="Fresher">Fresher</option>
+              <option value="0-1 Years">0-1 Years</option>
+              <option value="1-3 Years">1-3 Years</option>
+              <option value="3-5 Years">3-5 Years</option>
+              <option value="5+ Years">5+ Years</option>
+            </select>
+            {errors.experience && <div className="invalid-feedback">{errors.experience}</div>}
+          </div>
         </div>
 
-        {/* Location */}
-        <div className="form-group">
-          <label>Location</label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            className={errors.location ? "is-invalid" : ""}
-          />
-          {errors.location && <div className="invalid-feedback">{errors.location}</div>}
-        </div>
+        <div className="form-row">
+          {/* Salary */}
+          <div className="form-group">
+            <label>Salary ($)</label>
+            <input
+              type="number"
+              name="salary"
+              value={formData.salary}
+              onChange={handleChange}
+              className={errors.salary ? "is-invalid" : ""}
+              placeholder="Annual salary"
+            />
+            {errors.salary && <div className="invalid-feedback">{errors.salary}</div>}
+          </div>
 
-        {/* Job Type */}
-        <div className="form-group">
-          <label>Job Type</label>
-          <select
-            name="jobType"
-            value={formData.jobType}
-            onChange={handleChange}
-            className={errors.jobType ? "is-invalid" : ""}
-          >
-            <option value="">Select type</option>
-            <option value="Full-Time">Full-Time</option>
-            <option value="Part-Time">Part-Time</option>
-            <option value="Internship">Internship</option>
-            <option value="Contract">Contract</option>
-          </select>
-          {errors.jobType && <div className="invalid-feedback">{errors.jobType}</div>}
-        </div>
-
-        {/* Experience */}
-        <div className="form-group">
-          <label>Experience</label>
-          <select
-            name="experience"
-            value={formData.experience}
-            onChange={handleChange}
-            className={errors.experience ? "is-invalid" : ""}
-          >
-            <option value="">Select experience</option>
-            <option value="Fresher">Fresher</option>
-            <option value="0-1 Years">0-1 Years</option>
-            <option value="1-3 Years">1-3 Years</option>
-            <option value="3-5 Years">3-5 Years</option>
-            <option value="5+ Years">5+ Years</option>
-          </select>
-          {errors.experience && <div className="invalid-feedback">{errors.experience}</div>}
-        </div>
-
-        {/* Salary */}
-        <div className="form-group">
-          <label>Salary</label>
-          <input
-            type="number"
-            name="salary"
-            value={formData.salary}
-            onChange={handleChange}
-            className={errors.salary ? "is-invalid" : ""}
-          />
-          {errors.salary && <div className="invalid-feedback">{errors.salary}</div>}
-        </div>
-
-        {/* Company Image */}
-        <div className="form-group">
-          <label>Company Image</label>
-          <input
-            type="file"
-            name="companyImage"
-            accept="image/*"
-            onChange={handleChange}
-          />
+          {/* Company Image */}
+          <div className="form-group">
+            <label>Company Image</label>
+            <div className="file-input-wrapper">
+              <input
+                type="file"
+                name="companyImage"
+                accept="image/*"
+                onChange={handleChange}
+                id="companyImage"
+              />
+              <label htmlFor="companyImage" className="file-input-label">
+                Choose File
+              </label>
+              {formData.companyImage && (
+                <span className="file-name">{formData.companyImage.name}</span>
+              )}
+            </div>
+          </div>
         </div>
 
         <button type="submit" className="btn-submit" disabled={loading}>
-          {loading ? "Posting..." : "Add Job"}
+          {loading ? (
+            <>
+              <span className="spinner"></span>
+              Posting...
+            </>
+          ) : (
+            "Add Job"
+          )}
         </button>
       </form>
     </div>

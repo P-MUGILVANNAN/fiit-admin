@@ -13,7 +13,7 @@ export default function Jobs() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const [confirmDelete, setConfirmDelete] = useState(null); // job id waiting for confirm
+  const [confirmDelete, setConfirmDelete] = useState(null);
 
   const navigate = useNavigate();
 
@@ -91,7 +91,7 @@ export default function Jobs() {
         </div>
       </div>
 
-      {/* Table */}
+      {/* Grid of Cards */}
       {loading ? (
         <div className="spinner"></div>
       ) : error ? (
@@ -99,83 +99,80 @@ export default function Jobs() {
       ) : filteredJobs.length === 0 ? (
         <p className="no-data">No jobs found</p>
       ) : (
-        <div className="table-wrapper">
-          <table className="jobs-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Company</th>
-                <th>Title</th>
-                <th>Location</th>
-                <th>Type</th>
-                <th>Experience</th>
-                <th>Salary</th>
-                <th>Posted</th>
-                <th style={{ textAlign: "right" }}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredJobs.map((job, index) => (
-                <tr key={job._id}>
-                  <td>{index + 1 + (page - 1) * 10}</td>
-                  <td>
-                    {job.companyImage ? (
-                      <img
-                        src={job.companyImage}
-                        alt="company"
-                        className="table-avatar"
-                      />
-                    ) : (
-                      <span className="text-muted">No Logo</span>
-                    )}
-                  </td>
-                  <td>{job.title}</td>
-                  <td>{job.location}</td>
-                  <td>
-                    <span className="status-badge normal">{job.jobType}</span>
-                  </td>
-                  <td>
-                    <span className="status-badge normal">{job.experience}</span>
-                  </td>
-                  <td>₹ {job.salary?.toLocaleString()}</td>
-                  <td>{new Date(job.createdAt).toLocaleDateString()}</td>
-                  <td className="actions-cell mt-2">
-                    {confirmDelete === job._id ? (
-                      <>
-                        <button
-                          className="btn-sm btn-danger"
-                          onClick={() => handleDelete(job._id)}
-                        >
-                          Yes
-                        </button>
-                        <button
-                          className="btn-sm btn-secondary"
-                          onClick={() => setConfirmDelete(null)}
-                        >
-                          No
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button
-                          className="btn-sm btn-secondary"
-                          onClick={() => navigate(`/admin/jobs/${job._id}`)}
-                        >
-                          View
-                        </button>
-                        <button
-                          className="btn-sm btn-danger"
-                          onClick={() => setConfirmDelete(job._id)}
-                        >
-                          Delete
-                        </button>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="jobs-grid">
+          {filteredJobs.map((job) => (
+            <div key={job._id} className="job-card">
+              <div className="job-card-header">
+                <div className="job-logo-container">
+                  {job.companyImage ? (
+                    <img src={job.companyImage} alt="company logo" className="job-logo" />
+                  ) : (
+                    <span className="text-muted-logo">No Logo</span>
+                  )}
+                </div>
+                <div className="job-info">
+                  <h3 className="job-title">{job.title}</h3>
+                  <p className="job-company">{job.companyName}</p>
+                </div>
+              </div>
+              <div className="job-details">
+                <div className="detail-item">
+                  <p className="detail-label">Location:</p>
+                  <p className="detail-value">{job.location}</p>
+                </div>
+                <div className="detail-item">
+                  <p className="detail-label">Type:</p>
+                  <p className="detail-value">{job.jobType}</p>
+                </div>
+                <div className="detail-item">
+                  <p className="detail-label">Experience:</p>
+                  <p className="detail-value">{job.experience}</p>
+                </div>
+                <div className="detail-item">
+                  <p className="detail-label">Salary:</p>
+                  <p className="detail-value">₹ {job.salary?.toLocaleString()}</p>
+                </div>
+                <div className="detail-item">
+                  <p className="detail-label">Posted:</p>
+                  <p className="detail-value">{new Date(job.createdAt).toLocaleDateString()}</p>
+                </div>
+              </div>
+              <div className="card-actions">
+                {confirmDelete === job._id ? (
+                  <>
+                    <p className="confirm-text">Confirm Delete?</p>
+                    <button
+                      className="btn-sm btn-danger"
+                      onClick={() => handleDelete(job._id)}
+                    >
+                      Yes
+                    </button>
+                    <button
+                      className="btn-sm btn-secondary"
+                      onClick={() => setConfirmDelete(null)}
+                    >
+                      No
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="btn-sm btn-secondary"
+                      onClick={() => navigate(`/admin/jobs/${job._id}`)}
+                    >
+                      View
+                    </button>
+                    <button
+                      className="btn-sm btn-danger"
+                      onClick={() => setConfirmDelete(job._id)}
+                    >
+                      Delete
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       )}
 

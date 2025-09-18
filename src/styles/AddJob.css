@@ -1,124 +1,192 @@
-/* ===== Container ===== */
 .jobform-container {
-  max-width: 750px !important;
-  margin: 2rem auto !important;
-  padding: 2rem !important;
-  background: linear-gradient(180deg, #1e3a8a, #000000) !important;
-  color: #f0f9ff !important;
-  border-radius: 16px !important;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.7) !important;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
-/* Heading */
-.jobform-container h2 {
-  font-size: 2rem !important;
-  text-align: center !important;
-  margin-bottom: 1.5rem !important;
-  font-weight: 800 !important;
-  color: #ffffff !important;
+.jobform-header {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-/* Form wrapper */
-.jobform-container form {
-  background: #0f172a !important;
-  padding: 2rem !important;
-  border-radius: 14px !important;
-  box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.05) !important;
+.jobform-header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
 }
 
-/* Groups */
+.jobform-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.job-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
 .form-group {
-  margin-bottom: 1.2rem !important;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Labels */
-.jobform-container label {
-  font-weight: 600 !important;
-  color: #cbd5e1 !important;
-  margin-bottom: 0.4rem !important;
-  display: inline-block !important;
+.form-group.full-width {
+  grid-column: 1 / span 2;
 }
 
-/* Input fields & textarea */
-.jobform-container input,
-.jobform-container select,
-.jobform-container textarea {
-  width: 100% !important;
-  padding: 0.65rem 0.9rem !important;
-  border-radius: 10px !important;
-  border: 1px solid #334155 !important;
-  background: #1e293b !important;
-  color: #f0f9ff !important;
-  font-size: 1rem !important;
-  transition: all 0.2s ease-in-out !important;
+.form-group label {
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 
-.jobform-container input:focus,
-.jobform-container select:focus,
-.jobform-container textarea:focus {
-  outline: none !important;
-  border-color: #4f46e5 !important;
-  box-shadow: 0 0 6px #4f46e5 !important;
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
 }
 
-/* Invalid fields */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
 .is-invalid {
   border-color: #ef4444 !important;
 }
 
 .invalid-feedback {
-  color: #f87171 !important;
-  font-size: 0.9rem !important;
-  margin-top: 0.25rem !important;
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
 }
 
-/* File input */
-.jobform-container input[type="file"] {
-  padding: 0.4rem !important;
-  border-radius: 8px !important;
-  background: #1e293b !important;
-  color: #fff !important;
+.file-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-/* Submit button */
+.file-input-wrapper input[type="file"] {
+  display: none;
+}
+
+.file-input-label {
+  padding: 0.6rem 1rem;
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.file-input-label:hover {
+  background-color: #e5e7eb;
+}
+
+.file-name {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
 .btn-submit {
-  display: block !important;
-  width: 100% !important;
-  padding: 0.75rem !important;
-  background: #3b82f6 !important;
-  color: #fff !important;
-  font-weight: 600 !important;
-  border-radius: 10px !important;
-  border: none !important;
-  transition: background 0.2s ease-in-out !important;
-  cursor: pointer !important;
-  font-size: 1rem !important;
+  padding: 0.875rem 1.5rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .btn-submit:hover {
-  background: #2563eb !important;
+  background-color: #1d4ed8;
 }
 
-/* Success message */
+.btn-submit:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .alert-success {
-  text-align: center !important;
-  padding: 0.8rem 1rem !important;
-  border-radius: 8px !important;
-  margin-bottom: 1.5rem !important;
-  background-color: #10b981 !important;
-  color: #fff !important;
-  font-weight: 600 !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+  padding: 1rem;
+  background-color: #ecfdf5;
+  color: #065f46;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  border: 1px solid #a7f3d0;
 }
 
-/* Responsive */
-@media (max-width: 640px) {
-  .jobform-container {
-    padding: 1rem !important;
-  }
+.success-icon {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
 
-  .jobform-container form {
-    padding: 1rem !important;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .jobform-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .form-group.full-width {
+    grid-column: 1;
   }
 }

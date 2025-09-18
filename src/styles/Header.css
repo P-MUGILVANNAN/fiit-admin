@@ -77,13 +77,13 @@
   position: absolute !important;
   right: 0 !important;
   top: 130% !important;
-  background: #0f172a !important;
-  color: #e5e7eb !important;
+  background: #ffffff !important;
+  color: #333333 !important;
   border-radius: 12px !important;
   width: 320px !important;
   z-index: 2000 !important;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid #dee2e6 !important;
   overflow: hidden !important;
   animation: fadeIn 0.25s ease !important;
 }
@@ -94,30 +94,30 @@
   top: -8px !important;
   right: 14px !important;
   border: 8px solid transparent !important;
-  border-bottom-color: #0f172a !important;
+  border-bottom-color: #ffffff !important;
 }
 
 /* Header row inside dropdown */
 .notification-dropdown .dropdown-header {
   padding: 0.65rem 0.9rem !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 1px solid #dee2e6 !important;
   font-weight: 700 !important;
   font-size: 0.9rem !important;
-  color: #ffffff !important;
-  background: rgba(30, 58, 138, 0.25) !important;
+  color: #000000 !important;
+  background: #f8f9fa !important;
 }
 
 /* Clear button */
 .notification-dropdown .clear-btn {
   background: transparent !important;
-  color: #fca5a5 !important;
+  color: #dc3545 !important;
   border: none !important;
   padding: 0.2rem 0.4rem !important;
   font-size: 0.85rem !important;
   font-weight: 600 !important;
 }
 .notification-dropdown .clear-btn:hover {
-  color: #fecaca !important;
+  color: #c82333 !important;
 }
 
 /* List & items */
@@ -129,11 +129,11 @@
 }
 .notification-item {
   padding: 0.7rem 0.9rem !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-bottom: 1px solid #e9ecef !important;
   font-size: 0.9rem !important;
 }
 .notification-item:hover {
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: #f8f9fa !important;
 }
 .no-notifs {
   padding: 1.5rem !important;
@@ -147,5 +147,11 @@
 @media (max-width: 576px) {
   .topbar-header {
     padding: 0.5rem 1rem;
+  }
+}
+
+@media(max-width:500px){
+  .notification-dropdown{
+    width: 300px !important;
   }
 }

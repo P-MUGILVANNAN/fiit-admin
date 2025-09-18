@@ -251,14 +251,7 @@ function EditJob() {
         </div>
 
         <button type="submit" className="btn-submit" disabled={loading}>
-          {loading ? (
-            <>
-              <span className="spinner"></span>
-              Updating...
-            </>
-          ) : (
-            "Update Job"
-          )}
+          {loading ? "Updating..." : "Update Job"}
         </button>
       </form>
 

@@ -1,14 +1,67 @@
-/* Flex column layout to push footer to bottom */
 .app-layout {
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
   background: linear-gradient(135deg, #0d1b4c, #000000);
   color: #e0e0e0;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Main content grows to fill space between header and footer */
+.main-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: calc(100% - 250px); /* Default width */
+  transition: margin-left 0.3s ease-in-out;
+}
+
 .app-main {
   flex: 1;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem;
+  overflow-x: hidden;
+}
+
+/* Sidebar open on desktop */
+.sidebar-open .main-content-wrapper {
+  margin-left: 250px;
+}
+
+/* Sidebar closed on desktop */
+.sidebar-closed .main-content-wrapper {
+  margin-left: 80px;
+  width: calc(100% - 80px);
+}
+
+/* New: Overlay for mobile when sidebar is open */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1045; /* Below sidebar (1050) */
+  display: none;
+}
+
+/* Responsive styles for tablet and mobile */
+@media (max-width: 992px) {
+  .main-content-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Show overlay when sidebar is open on mobile */
+  .sidebar-open .sidebar-overlay {
+    display: block;
+    animation: fadeInOverlay 0.3s ease;
+  }
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 576px) {
+  .app-main {
+    padding: 1rem;
+  }
 }

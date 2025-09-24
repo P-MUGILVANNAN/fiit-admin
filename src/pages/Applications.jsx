@@ -62,17 +62,23 @@ const Applications = () => {
     }
   };
 
+  // src/pages/Applications.jsx
   const handleNotify = async (appId) => {
     try {
-      await axios.post(
+      const res = await axios.post(
         `${API_BASE}/admin/applications/${appId}/notify`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setNotifyMsg("✅ Notification sent successfully!");
+      // After a successful notification, re-fetch the applications
+      // to update the view. The response object `res` can be used
+      // to give more specific feedback.
+      fetchApplications(page);
+      // Use a simple alert for immediate user feedback
+      alert(res.data.message || "Notification sent successfully!");
     } catch (err) {
       console.error(err);
-      setNotifyMsg("Error sending notification.");
+      alert(err.response?.data?.message || "Error sending notification.");
     }
   };
 

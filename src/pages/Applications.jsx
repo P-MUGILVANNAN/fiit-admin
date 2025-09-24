@@ -49,36 +49,18 @@ const Applications = () => {
 
   const confirmStatusChange = async () => {
     try {
-      await axios.patch(
+      const res = await axios.patch(
         `${API_BASE}/admin/applications/${selectedApp._id}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+
       setConfirmBox(null);
+      setNotifyMsg(res.data.message);   // 🔹 show backend message
       fetchApplications(page);
     } catch (err) {
       console.error(err);
       setNotifyMsg("Error updating status.");
-    }
-  };
-
-  // src/pages/Applications.jsx
-  const handleNotify = async (appId) => {
-    try {
-      const res = await axios.post(
-        `${API_BASE}/admin/applications/${appId}/notify`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      // After a successful notification, re-fetch the applications
-      // to update the view. The response object `res` can be used
-      // to give more specific feedback.
-      fetchApplications(page);
-      // Use a simple alert for immediate user feedback
-      alert(res.data.message || "Notification sent successfully!");
-    } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || "Error sending notification.");
     }
   };
 
@@ -172,12 +154,6 @@ const Applications = () => {
                       <option value="accepted">Accepted</option>
                       <option value="rejected">Rejected</option>
                     </select>
-                    <button
-                      className="btn btn-secondary"
-                      onClick={() => handleNotify(app._id)}
-                    >
-                      Notify
-                    </button>
                   </div>
                 </td>
               </tr>

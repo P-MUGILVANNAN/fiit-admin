@@ -1,7 +1,7 @@
 .applications-container {
   max-width: 1200px !important;
   margin: 2rem auto !important;
-  padding: 2rem !important;
+  padding: 1rem !important;
   background: #ffffff !important;
   border-radius: 16px !important;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1) !important;
@@ -9,12 +9,21 @@
   font-size: 1rem !important;
 }
 
-/* Header row with search on right */
+/* ✅ RESPONSIVE Header row */
 .header-row {
   display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
   margin-bottom: 1.5rem !important;
+}
+
+/* For tablets and larger */
+@media (min-width: 768px) {
+  .header-row {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
 }
 
 .header-row h2 {
@@ -22,16 +31,33 @@
   font-size: 1.8rem !important;
   font-weight: 700 !important;
   color: #000000 !important;
+  text-align: center !important;
+}
+
+/* For tablets and larger */
+@media (min-width: 768px) {
+  .header-row h2 {
+    text-align: left !important;
+    font-size: 1.8rem !important;
+  }
 }
 
 .search-input {
-  width: 300px !important;
+  width: 100% !important;
   padding: 0.75rem 1rem !important;
   border-radius: 8px !important;
   border: 1px solid #ced4da !important;
   background: #f8f9fa !important;
   color: #333333 !important;
   font-size: 1rem !important;
+  box-sizing: border-box !important;
+}
+
+/* For tablets and larger */
+@media (min-width: 768px) {
+  .search-input {
+    width: 300px !important;
+  }
 }
 
 .search-input:focus {
@@ -40,11 +66,18 @@
   box-shadow: 0 0 6px #80bdff !important;
 }
 
-/* Table */
+/* Table - Make it responsive */
 .table-wrapper {
   overflow-x: auto !important;
   border-radius: 12px !important;
   border: 1px solid #dee2e6 !important;
+  margin: 0 -0.5rem !important; /* Add some negative margin for mobile */
+}
+
+@media (min-width: 768px) {
+  .table-wrapper {
+    margin: 0 !important; /* Reset negative margin on larger screens */
+  }
 }
 
 .applications-table {
@@ -55,6 +88,20 @@
   color: #333333 !important;
   border-radius: 12px !important;
   overflow: hidden !important;
+  min-width: 800px !important; /* Prevent table from getting too small */
+}
+
+/* Make table cells more compact on mobile */
+@media (max-width: 767px) {
+  .applications-table th,
+  .applications-table td {
+    padding: 0.75rem 0.5rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .applications-table th {
+    font-size: 0.95rem !important;
+  }
 }
 
 .applications-table th {
@@ -73,7 +120,7 @@
   font-size: 1rem !important;
 }
 
-/* Status badges */
+/* Status badges - make smaller on mobile */
 .status-badge {
   padding: 0.35rem 0.8rem !important;
   border-radius: 8px !important;
@@ -83,12 +130,19 @@
   font-size: 0.9rem !important;
 }
 
+@media (max-width: 767px) {
+  .status-badge {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.8rem !important;
+  }
+}
+
 .status-badge.applied { background: #6c757d !important; }
 .status-badge.shortlisted { background: #007bff !important; }
 .status-badge.accepted { background: #28a745 !important; }
 .status-badge.rejected { background: #dc3545 !important; }
 
-/* Select */
+/* Select - make responsive */
 .status-select {
   padding: 0.5rem 0.8rem !important;
   border-radius: 8px !important;
@@ -96,16 +150,23 @@
   background: #f8f9fa !important;
   color: #333333 !important;
   font-size: 0.95rem !important;
+  width: 100% !important;
 }
 
-/* ✅ New: Align select + button horizontally */
+@media (min-width: 768px) {
+  .status-select {
+    width: auto !important;
+  }
+}
+
+/* ✅ Align select + button horizontally */
 .status-actions {
   display: flex !important;
   align-items: center !important;
   gap: 0.6rem !important;
 }
 
-/* Buttons */
+/* Buttons - make responsive */
 .btn {
   padding: 0.6rem 1rem !important;
   border-radius: 8px !important;
@@ -113,6 +174,13 @@
   cursor: pointer !important;
   font-weight: 600 !important;
   font-size: 0.95rem !important;
+  width: 100% !important;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    width: auto !important;
+  }
 }
 
 .btn-secondary {
@@ -133,17 +201,25 @@
   background: #0056b3 !important;
 }
 
-/* Pagination */
+/* Pagination - make responsive */
 .pagination {
   display: flex !important;
-  justify-content: center !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
   align-items: center !important;
   margin-top: 1.5rem !important;
-  gap: 1rem !important;
   font-size: 1.05rem !important;
 }
 
-/* Modal */
+@media (min-width: 768px) {
+  .pagination {
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Modal - make responsive */
 .modal-overlay {
   position: fixed !important;
   inset: 0 !important;
@@ -152,16 +228,17 @@
   justify-content: center !important;
   align-items: center !important;
   z-index: 9999 !important;
+  padding: 1rem !important;
 }
 
 .modal-box {
   background: #ffffff !important;
-  padding: 2rem !important;
+  padding: 1.5rem !important;
   border-radius: 14px !important;
   text-align: center !important;
   color: #333333 !important;
   max-width: 450px !important;
-  width: 90% !important;
+  width: 100% !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   font-size: 1.05rem !important;
 }
@@ -169,8 +246,16 @@
 .modal-actions {
   margin-top: 1.5rem !important;
   display: flex !important;
-  justify-content: center !important;
-  gap: 1rem !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+
+@media (min-width: 480px) {
+  .modal-actions {
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+  }
 }
 
 /* Loading spinner */

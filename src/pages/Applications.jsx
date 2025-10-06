@@ -106,6 +106,8 @@ const Applications = () => {
               <th>Applicant</th>
               <th>Email</th>
               <th>Phone</th>
+              <th>Experience</th>
+              <th>Category</th>
               <th>Resume</th>
               <th>Job</th>
               <th>Status</th>
@@ -119,6 +121,8 @@ const Applications = () => {
                 <td>{app.applicant?.name || "N/A"}</td>
                 <td>{app.applicant?.email || "N/A"}</td>
                 <td>{app.applicant?.phone || "N/A"}</td>
+                <td>{app.applicant?.experience || "N/A"}</td>
+                <td>{app.applicant?.category || "N/A"}</td>
                 <td>
                   {app.applicant?.resume ? (
                     <a
